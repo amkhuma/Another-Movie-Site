@@ -3,13 +3,42 @@
   --primary-bg-color: black;
   --secondary-bg-color : #0D0D0D;
   --primary-txt-color: white; 
+  --nav-bg-color : black;
+  --tmdb-color : #01d277;
   --main-padding: 15px; 
 }
 
 .App {
-  width: 100%;
+  /* width: 100vw; */
   min-height: 100vh;
   background-color: var(--primary-bg-color);
+}
+
+.AppNav {
+  min-height: 58px;
+  background-color: var(--nav-bg-color);
+  color: var(--primary-txt-color)
+}
+
+.search-input {
+  background-color: var(--nav-bg-color) !important;
+  color: var(--primary-txt-color);
+  border-radius: 500rem !important;
+  border: 1px solid var(--tmdb-color);
+  text-align: left;
+  line-height: 1.21428571em;
+  padding: .67857143em 1em;
+}
+
+.search-input::placeholder {
+  color: var(--primary-txt-color);
+}
+
+.search-input-icon {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
 }
 
 .App-logo {
