@@ -20,7 +20,7 @@ class App extends Component {
           <Container style={{paddingTop : '10px', paddingBottom : '10px'}}>
             <Menu borderless inverted secondary>
               <Menu.Item>
-                <h2>Another Movie Site</h2>
+                <h2><span className='tmdb-color'>A</span>nother <span className='tmdb-color'>M</span>ovie <span className='tmdb-color'>S</span>ite</h2>
               </Menu.Item>
               <Menu.Menu position='right'>
                 <Menu.Item style={{position : 'relative'}}>
@@ -32,7 +32,10 @@ class App extends Component {
           </Container>
         </nav>
         <div className="AppBody">
-          <RandomMovie/>
+        <RandomMovie/>
+        <RandomMovie/>
+        <RandomMovie/>
+        <RandomMovie/>
         </div>
       </div>
     );

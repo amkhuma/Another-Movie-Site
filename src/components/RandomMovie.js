@@ -38,11 +38,20 @@ class RandomMovie extends Component {
 
         return (
             <Segment className='movie-segment'>
-                <Grid>
-                    <Grid.Column mobile={16} tablet={6} computer={6}>
-                        <Image style={{height: '470px'}} src={movie.image}/>
+                <Grid centered>
+                    <Grid.Column mobile={16} tablet={6} computer={9}>
+                        {/* <Responsive maxWidth={768}> */}
+                            <Image src={movie.image}/>
+                        {/* </Responsive>
+                        <Responsive minWidth={768} maxWidth={1023}>
+                            <Image size='big' src={movie.image}/>
+                        </Responsive> */}
+                        {/* <Responsive></Responsive>
+                        <Responsive minWidth={1024}> 
+                            <Image style={{width : '300', height : '450'}} size='medium'  src={movie.image}/>
+                        </Responsive> */}
                     </Grid.Column>
-                    <Grid.Column mobile={16} tablet={10} computer={10}>
+                    <Grid.Column mobile={16} tablet={10} computer={7}>
                         <h1>{movie.title}</h1>
                         <p>User Rating : </p>
                         <Progress
