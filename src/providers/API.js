@@ -21,11 +21,7 @@ const API = {
     },
     images : {
         movieImage : (image) => {
-            return (
-                axios.get(`${image_uri}${image}`)
-                .then(res => res)
-                .catch(err => err.response)
-            )
+            return (`${image_uri}${image}`)
         }
     },
     generated : {

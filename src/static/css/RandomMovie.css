@@ -1,0 +1,30 @@
+:root {
+    --primary-bg-color: black;
+    --secondary-bg-color : #0D0D0D;
+    --primary-txt-color: white; 
+    --nav-bg-color : black;
+    --tmdb-color : #01d277;
+    --main-padding: 15px; 
+}
+
+.movie-segment {
+    color: var(--primary-txt-color);
+    background-color: var(--secondary-bg-color) !important;
+    border: 0 !important;
+    border-radius: 0px !important;
+    margin-left: 4% !important;
+    margin-right: 4% !important;
+    height: 500px !important;
+}
+
+/* .divName{position:relative;}
+.divName:after {
+	content:"";
+	position:absolute;
+	left:0;
+	right:0;
+    top:-40px;
+    width: 500px;
+	height: 450px;
+	background:url(https://images.unsplash.com/photo-1531966662811-c6501e46eda6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) repeat-x 0 0;
+} */

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+import './static/css/App.css';
 import API from './providers/API';
 import { Container, Menu, Icon } from 'semantic-ui-react';
+import RandomMovie from './components/RandomMovie';
 
 class App extends Component {
 
@@ -30,19 +31,9 @@ class App extends Component {
             </Menu>
           </Container>
         </nav>
-        <header className="App-header">
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <div className="AppBody">
+          <RandomMovie/>
+        </div>
       </div>
     );
   }
