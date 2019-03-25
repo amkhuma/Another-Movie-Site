@@ -17,7 +17,7 @@ const API = {
     search : {
         movie : (query) => {
             return (
-                axios.get(`${base_uri}search/movie?api_key=${API_KEY}&query=${query}${query_options.lang}${query_options.page}`)
+                axios.get(`${base_uri}search/movie?api_key=${API_KEY}&query=${query}${query_options.lang}${query_options.page}`, axios_options)
                 .then(res => res)
                 .catch(err => err.response)
             )
@@ -32,14 +32,13 @@ const API = {
         // THIS WILL BE USED TO GET ONE RANDOM MOVIE/TOP RATED MOVIE FROM THE MOST POPULAR MOVIES OR NOW PLAYING
         getMovieDetails : (movieID) => {
             return (
-                axios.get(`${base_uri}movie/${movieID}?api_key=${API_KEY}${query_options.lang}`)
+                axios.get(`${base_uri}movie/${movieID}?api_key=${API_KEY}${query_options.lang}`, axios_options)
                 .then(res => res)
                 .catch(err => err.response)
             )
         },
         //THIS FUNCTION WILL ONLY RETURN 10 OF THE MOST POPULAR MOVIES FROM TMDB
         getPopularMovies : () =>  {
-
             return (
                 axios.get(`${base_uri}movie/popular?api_key=${API_KEY}${query_options.lang}${query_options.page}`, axios_options)
                 .then(res => res)
@@ -48,7 +47,7 @@ const API = {
         },
         nowPlaying : () => {
             return (
-                axios.get(`${base_uri}movie/now_playing?api_key=${API_KEY}${query_options.lang}${query_options.page}`)
+                axios.get(`${base_uri}movie/now_playing?api_key=${API_KEY}${query_options.lang}${query_options.page}`, axios_options)
                 .then(res => res)
                 .catch(err => err.response)
             )
@@ -57,7 +56,7 @@ const API = {
     genre : {
         getAllGenres : () => {
             return (
-                axios.get(`${base_uri}genre/movie/list?api_key=${API_KEY}${query_options.lang}`)
+                axios.get(`${base_uri}genre/movie/list?api_key=${API_KEY}${query_options.lang}`, axios_options)
             )
             .then(res => res)
             .catch(err => err.response)
