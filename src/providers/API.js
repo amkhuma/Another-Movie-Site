@@ -26,7 +26,7 @@ const API = {
     },
     generated : {
         // THIS WILL BE USED TO GET ONE RANDOM MOVIE/TOP RATED MOVIE FROM THE MOST POPULAR MOVIES OR NOW PLAYING
-        randomMovie : (movieID) => {
+        getMovieDetails : (movieID) => {
             return (
                 axios.get(`${base_uri}movie/${movieID}?api_key=${API_KEY}${query_options.lang}`)
                 .then(res => res)

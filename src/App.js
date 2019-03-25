@@ -1,19 +1,76 @@
 import React, { Component } from 'react';
 import './static/css/App.css';
 import API from './providers/API';
-import { Container, Menu, Icon, Responsive } from 'semantic-ui-react';
+import { Container, Menu, Icon, Responsive, Loader } from 'semantic-ui-react';
 import RandomMovie from './components/RandomMovie';
 
 class App extends Component {
 
+  constructor(props)
+  {
+      super(props)
+      this.state = {
+          nowPlaying : [],
+          popularMovies : [],
+          timer: null,
+          counter: 0,
+          selectedMovie : {},
+          selectedMovieId : 0,
+          isLoading: true
+      }
+    }
+
+  getNowPlaying = async () => {
+    const res = await API.generated.nowPlaying()
+    this.setState({
+      nowPlaying : res.data.results,
+      selectedMovie : res.data.results[this.state.counter],
+      isLoading : false
+    })
+  }
+
+  getMovieDetails = async (id) => {
+    const res = await API.generated.getMovieDetails(id)
+    this.setState({selectedMovie : res.data})
+  }
+
   getPopularMovies = async () => {
     const res = await API.generated.getPopularMovies()
-    console.log(res)
+    this.setState({
+      popularMovies : res.data.results,
+    })  
   }
+
   componentDidMount () {
+    this.getNowPlaying()
     this.getPopularMovies()
+    let timer = setInterval(this.tick, 15000);
+    this.setState({timer});
   }
+
+  componentWillUnmount() {
+    this.clearInterval(this.state.timer);
+  }
+
+  tick = async () => {
+    if (this.state.counter === 9)
+    {
+      await this.setState({counter : -1})
+    }
+    // i dont think setting the state 2 times in a row is good, but i couldnt find a solution to some small problem i had :(
+    await this.setState({
+      counter: this.state.counter + 1,
+    });
+
+    this.getMovieDetails(this.state.nowPlaying[this.state.counter].id)
+
+    await this.setState({
+      selectedMovieId : this.state.nowPlaying[this.state.counter].id
+    });
+  }
+
   render() {
+    const {selectedMovie, isLoading} = this.state
     return (
       <div className="App">
         <nav className='AppNav'>
@@ -37,10 +94,12 @@ class App extends Component {
           </Container>
         </nav>
         <div className="AppBody">
-        <RandomMovie/>
-        {/* <RandomMovie/>
-        <RandomMovie/>
-        <RandomMovie/> */}
+          {
+            isLoading ? 
+                <Loader className='tmdb-color' indeterminate inverted active size='big' content='Just a moment, fetching movie data.'/> 
+              : 
+                <RandomMovie selectedMovie={selectedMovie}/>
+          }
         </div>
       </div>
     );
