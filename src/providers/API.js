@@ -1,5 +1,4 @@
 import axios from 'axios'
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 const base_uri = 'http://api.themoviedb.org/3/'
 // eslint-disable-next-line
@@ -36,6 +35,8 @@ const API = {
         },
         //THIS FUNCTION WILL ONLY RETURN 10 OF THE MOST POPULAR MOVIES FROM TMDB
         getPopularMovies : () =>  {
+            axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
             return (
                 axios.get(`${base_uri}movie/popular?api_key=${API_KEY}${query_options.lang}${query_options.page}`)
                 .then(res => res)
