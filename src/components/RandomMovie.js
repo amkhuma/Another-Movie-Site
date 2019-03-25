@@ -71,7 +71,7 @@ const RenderMovie = (props) => {
                         else 
                             return (<React.Fragment key={genre.id}>&#160; {`${genre.name},`}</React.Fragment>)
                     })} </h4>
-                    <h4>Website &#160; : &#160;  <a href={`${movie.homepage}`}>{movie.homepage}</a> <Icon className='tmdb-color' name='globe'/></h4>
+                    <h4>Website &#160; : &#160;   <a href={`${movie.homepage}`}>{movie.title} <Icon className='tmdb-color' name='globe'/></a></h4>
                 </div>
             </div>
         </>

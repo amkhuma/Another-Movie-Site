@@ -3,6 +3,7 @@ import './static/css/App.css';
 import API from './providers/API';
 import { Container, Menu, Icon, Responsive, Loader } from 'semantic-ui-react';
 import RandomMovie from './components/RandomMovie';
+import PopularMovies from './components/PopularMovies';
 
 class App extends Component {
 
@@ -71,7 +72,7 @@ class App extends Component {
   }
 
   render() {
-    const {selectedMovie, isLoading} = this.state
+    const {selectedMovie, isLoading, popularMovies} = this.state
     return (
       <div className="App">
         <nav className='AppNav'>
@@ -99,7 +100,10 @@ class App extends Component {
             isLoading ? 
                 <Loader indeterminate inverted active size='big' content='Just a moment, fetching movie data.'/> 
               : 
-                <RandomMovie selectedMovie={selectedMovie}/>
+                <>
+                  <RandomMovie selectedMovie={selectedMovie}/>
+                  <PopularMovies popularMovies={popularMovies}/>
+                </>
           }
         </div>
       </div>
