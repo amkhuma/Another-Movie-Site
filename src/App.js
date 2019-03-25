@@ -18,27 +18,37 @@ class App extends Component {
           selectedMovie : {},
           selectedMovieId : 0,
           isLoading: true,
-        res : {}
       }
     }
 
   getNowPlaying = async () => {
     const res = await API.generated.nowPlaying()
-    this.setState({res : res})
-      {/*nowPlaying : res.data.results,
+    console.log(res)
+    this.setState({
+      nowPlaying : res.data.results,
       selectedMovie : res.data.results[this.state.counter],
       isLoading : false
     })
-    this.getMovieDetails(res.data.results[this.state.counter].id)*/}
+    this.getMovieDetails(res.data.results[this.state.counter].id)
   }
 
-  
+  getMovieDetails = async (id) => {		
+    const res = await API.generated.getMovieDetails(id)		
+    this.setState({selectedMovie : res.data})		
+  }		
+		
+  getPopularMovies = async () => {		
+    const res = await API.generated.getPopularMovies()		
+    this.setState({		
+      popularMovies : res.data.results,		
+    })  		
+  }
 
   componentDidMount () {
     this.getNowPlaying()
-   // this.getPopularMovies()
-   // let timer = setInterval(this.tick, 15000);
-    //this.setState({timer});
+   this.getPopularMovies()
+   let timer = setInterval(this.tick, 15000);
+    this.setState({timer});
   }
 
   componentWillUnmount() {
@@ -66,9 +76,6 @@ class App extends Component {
     const {selectedMovie, isLoading, popularMovies} = this.state
     return (
       <div className="App">
-                             <pre>{JSON.stringify(this.state.res, 2, " ")}</pre>
-
-
         <nav className='AppNav'>
           <Container style={{paddingTop : '10px', paddingBottom : '10px'}}>
             <Menu borderless inverted secondary>
