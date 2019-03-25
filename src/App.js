@@ -27,6 +27,7 @@ class App extends Component {
       selectedMovie : res.data.results[this.state.counter],
       isLoading : false
     })
+    this.getMovieDetails(res.data.results[this.state.counter].id)
   }
 
   getMovieDetails = async (id) => {
@@ -96,7 +97,7 @@ class App extends Component {
         <div className="AppBody">
           {
             isLoading ? 
-                <Loader className='tmdb-color' indeterminate inverted active size='big' content='Just a moment, fetching movie data.'/> 
+                <Loader indeterminate inverted active size='big' content='Just a moment, fetching movie data.'/> 
               : 
                 <RandomMovie selectedMovie={selectedMovie}/>
           }
