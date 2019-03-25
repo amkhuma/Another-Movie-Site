@@ -32,17 +32,7 @@ class App extends Component {
     this.getMovieDetails(res.data.results[this.state.counter].id)*/}
   }
 
-  {/*getMovieDetails = async (id) => {
-    const res = await API.generated.getMovieDetails(id)
-    this.setState({selectedMovie : res.data})
-  }
-
-  getPopularMovies = async () => {
-    const res = await API.generated.getPopularMovies()
-    this.setState({
-      popularMovies : res.data.results,
-    })  
-  }*/}
+  
 
   componentDidMount () {
     this.getNowPlaying()
