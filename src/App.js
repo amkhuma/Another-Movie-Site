@@ -23,7 +23,7 @@ class App extends Component {
                 <Responsive maxWidth={767}>
                   <h2 className='tmdb-color'>AMS</h2>
                 </Responsive>
-                <Responsive maxWidth={768}>
+                <Responsive minWidth={768}>
                   <h2><span className='tmdb-color'>A</span>nother <span className='tmdb-color'>M</span>ovie <span className='tmdb-color'>S</span>ite</h2>
                 </Responsive>
               </Menu.Item>
