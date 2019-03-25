@@ -9,6 +9,10 @@ const query_options = {
     page : '&page=1' 
 }
 
+const axios_options = {
+    headers: {'X-Requested-With': 'XMLHttpRequest'}
+}
+
 const API = {
     search : {
         movie : (query) => {
@@ -35,10 +39,9 @@ const API = {
         },
         //THIS FUNCTION WILL ONLY RETURN 10 OF THE MOST POPULAR MOVIES FROM TMDB
         getPopularMovies : () =>  {
-            axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
             return (
-                axios.get(`${base_uri}movie/popular?api_key=${API_KEY}${query_options.lang}${query_options.page}`)
+                axios.get(`${base_uri}movie/popular?api_key=${API_KEY}${query_options.lang}${query_options.page}`, axios_options)
                 .then(res => res)
                 .catch(err => err.response)
             )
