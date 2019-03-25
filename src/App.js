@@ -38,9 +38,9 @@ class App extends Component {
         </nav>
         <div className="AppBody">
         <RandomMovie/>
+        {/* <RandomMovie/>
         <RandomMovie/>
-        <RandomMovie/>
-        <RandomMovie/>
+        <RandomMovie/> */}
         </div>
       </div>
     );

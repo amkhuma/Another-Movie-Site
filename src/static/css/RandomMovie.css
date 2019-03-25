@@ -17,14 +17,34 @@
     /* height: 500px !important; */
 }
 
-/* .divName{position:relative;}
-.divName:after {
-	content:"";
-	position:absolute;
-	left:0;
-	right:0;
-    top:-40px;
-    width: 500px;
-	height: 450px;
-	background:url(https://images.unsplash.com/photo-1531966662811-c6501e46eda6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80) repeat-x 0 0;
-} */
+.column {
+    float: left;
+    /* width: 50%; */
+    padding-left : 0px;
+    padding-right : 10px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    /* height: 300px; Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.movie-title {
+    /* margin: 0; */
+    /* padding:5; */
+    font-size: 2.4em;
+    line-height: 1.1em;
+    font-weight: 700;
+    display: inline-block 
+}
+
+.release-date {
+    opacity: 0.6;
+    font-size: 1.7em;
+    font-weight: 400;
+}
