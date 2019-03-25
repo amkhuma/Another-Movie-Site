@@ -12,8 +12,8 @@
     background-color: var(--secondary-bg-color) !important;
     border: 0 !important;
     border-radius: 0px !important;
-    margin-left: 4% !important;
-    margin-right: 4% !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
     /* height: 500px !important; */
 }
 
