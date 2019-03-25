@@ -43,7 +43,7 @@ const API = {
             )
         },
         nowPlaying : () => {
-x            return (
+            return (
                 axios.get(`${base_uri}movie/now_playing?api_key=${API_KEY}${query_options.lang}${query_options.page}`)
                 .then(res => res)
                 .catch(err => err.response)
