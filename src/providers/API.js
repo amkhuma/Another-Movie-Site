@@ -1,4 +1,5 @@
 import axios from 'axios'
+axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 const base_uri = 'http://api.themoviedb.org/3/'
 // eslint-disable-next-line
@@ -42,7 +43,7 @@ const API = {
             )
         },
         nowPlaying : () => {
-            return (
+x            return (
                 axios.get(`${base_uri}movie/now_playing?api_key=${API_KEY}${query_options.lang}${query_options.page}`)
                 .then(res => res)
                 .catch(err => err.response)
