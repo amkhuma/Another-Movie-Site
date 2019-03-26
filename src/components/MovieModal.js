@@ -1,6 +1,6 @@
 import React from 'react';
 import { RenderMovie } from './RenderMovie';
-import { Image, Responsive, Icon, Modal } from 'semantic-ui-react';
+import { Image, Responsive, Icon, Modal, Button } from 'semantic-ui-react';
 import API from '../providers/API';
 
 export const MovieModal = (props) => {
@@ -16,6 +16,9 @@ export const MovieModal = (props) => {
                 </Modal.Header>
                 <div className="modal-column column-padding">
                     <RenderMovie includeTitle={false} includeImage={true} movie={selectedMovie} imageWidth={'100%'} contentWidth={'100%'}/>
+                    <center>
+                        <Button className='movie-list-button' as='a' href={`https://www.themoviedb.org/movie/${selectedMovie.id}`} >View On TMDB</Button>
+                    </center>
                 </div>
             </Responsive>
             <Responsive minWidth={768}>
@@ -29,6 +32,7 @@ export const MovieModal = (props) => {
                             <Icon onClick={() => closeModal()} className='movie-modal-icon' name='close'/>
                         </h3>
                         <RenderMovie includeTitle={false} includeImage={false} movie={selectedMovie} imageWidth={'100%'} contentWidth={'100%'}/>
+                        <Button floated='right' className='movie-list-button' as='a' href={`https://www.themoviedb.org/movie/${selectedMovie.id}`} >View On TMDB</Button>
                     </div>
                 </div>
             </Responsive>
