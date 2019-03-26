@@ -29,7 +29,6 @@ class App extends Component {
 
   getNowPlaying = async () => {
     const res = await API.generated.nowPlaying()
-    console.log(res)
     this.setState({
       nowPlaying : res.results,
       selectedMovie : res.results[this.state.counter],
@@ -45,7 +44,6 @@ class App extends Component {
 
   getMovieDetails = async (id) => {		
     const res = await API.generated.getMovieDetails(id)	
-    console.log(res)	
     this.setState({selectedMovie : res})		
   }		
 		
