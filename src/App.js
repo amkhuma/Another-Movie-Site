@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './static/css/App.css';
 import API from './providers/API';
-import { Container, Menu, Icon, Responsive, Loader } from 'semantic-ui-react';
+import { Container, Menu, Responsive, Loader, Input } from 'semantic-ui-react';
 import RandomMovie from './components/RandomMovie';
 import PopularMovies from './components/PopularMovies';
+import validator from 'validator'
 
 class App extends Component {
 
@@ -18,6 +19,8 @@ class App extends Component {
           selectedMovie : {},
           selectedMovieId : 0,
           isLoading: true,
+          searchResults : {},
+          isSearching  : false
       }
     }
 
@@ -33,7 +36,7 @@ class App extends Component {
 
   getMovieSearchQuerie = async (query) => {
     const res = await API.search.movie(query)
-    console.log(res)
+    this.setState({ searchResults : res.data.results })		
   }
 
   getMovieDetails = async (id) => {		
@@ -49,7 +52,6 @@ class App extends Component {
   }
 
   componentDidMount () {
-    this.getMovieSearchQuerie('thor')
     this.getNowPlaying()
     this.getPopularMovies()
     let timer = setInterval(this.tick, 15000);
@@ -77,11 +79,25 @@ class App extends Component {
     });
   }
 
+
+  onChange = async (e) => {
+    const query = e.target.value
+    if (!validator.isEmpty(query, { ignore_whitespace: true } )) {
+      await this.setState({ isSearching : true })
+      this.getMovieSearchQuerie(query)
+    }
+    else {
+      this.setState({ isSearching : false })
+    }
+  } 
+
   render() {
-    const {selectedMovie, isLoading, popularMovies} = this.state
+    const {selectedMovie, isLoading, popularMovies, searchResults} = this.state
     return (
       <div className="App">
         <nav className='AppNav'>
+        {/* <pre>{JSON.stringify(searchResults, 2, " ")}</pre> */}
+
           <Container style={{paddingTop : '10px', paddingBottom : '10px'}}>
             <Menu borderless inverted secondary>
               <Menu.Item>
@@ -94,8 +110,8 @@ class App extends Component {
               </Menu.Item>
               <Menu.Menu position='right'>
                 <Menu.Item style={{position : 'relative'}}>
-                  <input className='search-input' placeholder='Seach Movies..'/>
-                  <Icon className='search-input-icon' size='large' inverted name='search'/>
+                  <Input onChange={this.onChange} className="search-input" placeholder='Seach Movies..'/>
+                  {/* <Icon className='search-input-icon' size='large' inverted name='search'/> */}
                 </Menu.Item>
               </Menu.Menu>
             </Menu>
@@ -116,5 +132,14 @@ class App extends Component {
     );
   }
 }
+
+// style={{backgroundColor: 'black',
+//   color: 'white',
+//   borderRadius: '500rem',
+//   border: '1px solid #01d277',
+//   textAlign: 'left',
+//   lineHeight: '1.21428571em',
+//   padding: '.67857143em 1em'
+// }} 
 
 export default App;

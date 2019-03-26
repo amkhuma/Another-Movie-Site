@@ -30,7 +30,14 @@
   border: 1px solid var(--tmdb-color);
   text-align: left;
   line-height: 1.21428571em;
-  padding: .67857143em 1em;
+  padding: .47857143em 1em;
+}
+
+.search-input > input {
+  background: var(--primary-bg-color) !important;
+  border: 0px !important;
+  border-radius: 0px !important;
+  color: var(--primary-txt-color) !important;
 }
 
 .search-input::placeholder {

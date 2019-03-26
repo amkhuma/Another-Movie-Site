@@ -45,7 +45,6 @@ class PopularMovies extends Component {
             this.props.popularMovies.length > 0 ? 
                 <Container style={{color : 'white'}}>
                     <h1>Most Popular Movies</h1>
-                    <pre>{JSON.stringify(modalOpen, 2, " ")}</pre>
                     <List inverted divided>
                         {
                             this.props.popularMovies.map((movie, i) => (
