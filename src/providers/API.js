@@ -1,4 +1,4 @@
-import axios from 'axios'
+// import axios from 'axios'
 
 const base_uri = 'http://api.themoviedb.org/3/'
 // eslint-disable-next-line
@@ -18,9 +18,16 @@ const API = {
     search : {
         movie : (query) => {
             return (
-                axios.get(`${base_uri}search/movie?api_key=${API_KEY}&query=${query}${query_options.lang}${query_options.page}`)
-                .then(res => res)
-                .catch(err => err.response)
+                fetch(`${base_uri}search/movie?api_key=${API_KEY}&query=${query}${query_options.lang}${query_options.page}`)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                      return(result)
+                    },
+                    (error) => {
+                      return(error)
+                    }
+                )
             )
         }
     },
@@ -33,34 +40,62 @@ const API = {
         // THIS WILL BE USED TO GET ONE RANDOM MOVIE/TOP RATED MOVIE FROM THE MOST POPULAR MOVIES OR NOW PLAYING
         getMovieDetails : (movieID) => {
             return (
-                axios.get(`${base_uri}movie/${movieID}?api_key=${API_KEY}${query_options.lang}`)
-                .then(res => res)
-                .catch(err => err.response)
+                fetch(`${base_uri}movie/${movieID}?api_key=${API_KEY}${query_options.lang}`)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                      return(result)
+                    },
+                    (error) => {
+                      return(error)
+                    }
+                )
             )
         },
         //THIS FUNCTION WILL ONLY RETURN 10 OF THE MOST POPULAR MOVIES FROM TMDB
         getPopularMovies : () =>  {
             return (
-                axios.get(`${base_uri}movie/popular?api_key=${API_KEY}${query_options.lang}${query_options.page}`)
-                .then(res => res)
-                .catch(err => err.response)
+                fetch(`${base_uri}movie/popular?api_key=${API_KEY}${query_options.lang}${query_options.page}`)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                      return(result)
+                    },
+                    (error) => {
+                      return(error)
+                    }
+                )
             )
         },
         nowPlaying : () => {
             return (
-                axios.get(`${base_uri}movie/now_playing?api_key=${API_KEY}${query_options.lang}${query_options.page}`)
-                .then(res => res)
-                .catch(err => err.response)
+                fetch(`${base_uri}movie/now_playing?api_key=${API_KEY}${query_options.lang}${query_options.page}`)
+                .then(res => res.json())
+                .then(
+                    (result) => {
+                      return(result)
+                    },
+                    (error) => {
+                      return(error)
+                    }
+                )
             )
         }
     },
     genre : {
         getAllGenres : () => {
             return (
-                axios.get(`${base_uri}genre/movie/list?api_key=${API_KEY}${query_options.lang}`)
+                fetch(`${base_uri}genre/movie/list?api_key=${API_KEY}${query_options.lang}`)
             )
-            .then(res => res)
-            .catch(err => err.response)
+            .then(res => res.json())
+            .then(
+                (result) => {
+                    return(result)
+                },
+                (error) => {
+                    return(error)
+                }
+            )
         }
     }
 }

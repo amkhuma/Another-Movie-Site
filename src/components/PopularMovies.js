@@ -32,7 +32,7 @@ class PopularMovies extends Component {
 
     openModal = async (mvie) => {
         const res = await API.generated.getMovieDetails(mvie.id)
-        this.setState({ modalOpen : true, selectedMovie : res.data })
+        this.setState({ modalOpen : true, selectedMovie : res })
     } 
     
     closeModal = () => this.setState({ modalOpen : false, selectedMovie : {} })

@@ -29,28 +29,30 @@ class App extends Component {
 
   getNowPlaying = async () => {
     const res = await API.generated.nowPlaying()
+    console.log(res)
     this.setState({
-      nowPlaying : res.data.results,
-      selectedMovie : res.data.results[this.state.counter],
+      nowPlaying : res.results,
+      selectedMovie : res.results[this.state.counter],
       isLoading : false
     })
-    this.getMovieDetails(res.data.results[this.state.counter].id)
+    this.getMovieDetails(res.results[this.state.counter].id)
   }
 
   getMovieSearchQuerie = async (query) => {
     const res = await API.search.movie(query)
-    this.setState({ searchResults : res.data.results, isSearching : false })		
+    this.setState({ searchResults : res.results, isSearching : false })		
   }
 
   getMovieDetails = async (id) => {		
-    const res = await API.generated.getMovieDetails(id)		
-    this.setState({selectedMovie : res.data})		
+    const res = await API.generated.getMovieDetails(id)	
+    console.log(res)	
+    this.setState({selectedMovie : res})		
   }		
 		
   getPopularMovies = async () => {		
     const res = await API.generated.getPopularMovies()		
     this.setState({		
-      popularMovies : res.data.results,		
+      popularMovies : res.results,		
     })  		
   }
 
