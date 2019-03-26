@@ -19,3 +19,41 @@
     color: white !important;
     background-color: var(--tmdb-color) !important;
 }
+
+
+.movie-modal  {
+    border-radius: 0 !important;
+    background-color: var(--primary-bg-color) !important;
+    color: var(--primary-txt-color);
+    /* padding: 0px !important; */
+}
+
+.modal-column {
+    float: left;
+    /* width: 50%; */
+    
+    /* height: 300px; Should be removed. Only for demonstration */
+}
+
+.movie-modal-icon {
+    float : right;
+    cursor : pointer;
+}
+
+.movie-modal-icon:hover {
+    color: var(--tmdb-color) !important;
+}
+
+.column-padding  {
+    padding-left : 15px;
+    padding-right : 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* Clear floats after the columns */
+.modal-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}

@@ -23,13 +23,17 @@ class App extends Component {
 
   getNowPlaying = async () => {
     const res = await API.generated.nowPlaying()
-    console.log(res)
     this.setState({
       nowPlaying : res.data.results,
       selectedMovie : res.data.results[this.state.counter],
       isLoading : false
     })
     this.getMovieDetails(res.data.results[this.state.counter].id)
+  }
+
+  getMovieSearchQuerie = async (query) => {
+    const res = await API.search.movie(query)
+    console.log(res)
   }
 
   getMovieDetails = async (id) => {		
@@ -45,9 +49,10 @@ class App extends Component {
   }
 
   componentDidMount () {
+    this.getMovieSearchQuerie('thor')
     this.getNowPlaying()
-   this.getPopularMovies()
-   let timer = setInterval(this.tick, 15000);
+    this.getPopularMovies()
+    let timer = setInterval(this.tick, 15000);
     this.setState({timer});
   }
 

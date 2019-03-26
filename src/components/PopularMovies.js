@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../static/css/PopularMovies.css';
-import { List, Container, Image, Responsive, Icon, Button } from 'semantic-ui-react';
+import { List, Container, Image, Responsive, Icon, Button, Modal } from 'semantic-ui-react';
 import API from '../providers/API';
-// import API from '../providers/API';
+import { MovieModal } from './MovieModal';
 
 const RenderListContent = (props) => {
     const {movie} = props
@@ -26,21 +26,26 @@ class PopularMovies extends Component {
     {
         super(props)
         this.state = {
-            movieList : []      
+            modalOpen : false,
+            selectedMovie : {}
         }
     }
 
-    // componentDidMount() {
-    //     this.setState({movieList : this.props.popularMovies})
-    // }
+    openModal = async (mvie) => {
+        const res = await API.generated.getMovieDetails(mvie.id)
+        this.setState({ modalOpen : true, selectedMovie : res.data })
+    } 
+    
+    closeModal = () => this.setState({ modalOpen : false, selectedMovie : {} })
 
     render() {
-        // const {movieList} = this.state
+        const {modalOpen, selectedMovie} = this.state
+
         return (
             this.props.popularMovies.length > 0 ? 
                 <Container style={{color : 'white'}}>
                     <h1>Most Popular Movies</h1>
-                    {/* <pre>{JSON.stringify(this.props.popularMovies, 2, " ")}</pre> */}
+                    <pre>{JSON.stringify(modalOpen, 2, " ")}</pre>
                     <List inverted divided>
                         {
                             this.props.popularMovies.map((movie, i) => (
@@ -49,18 +54,21 @@ class PopularMovies extends Component {
                                         <center>
                                             <Image size='tiny' src={API.images.movieImage(movie.poster_path)} />
                                             <RenderListContent movie={movie}/>
-                                            <Button className='movie-list-button'>More Details</Button>
+                                            <Button onClick={() => this.openModal(movie)} className='movie-list-button'>More Details</Button>
                                         </center>
                                     </Responsive>
                                     <Responsive minWidth={768}>
                                         <Image floated={i % 2 === 0 ? 'left' : 'right' } size='small' src={API.images.movieImage(movie.poster_path)} />
                                         <RenderListContent movie={movie}/>
-                                        <Button className='movie-list-button' floated={i % 2 === 0 ? 'right' : 'left' }>More Details</Button>
+                                        <Button onClick={() => this.openModal(movie)} className='movie-list-button' floated={i % 2 === 0 ? 'right' : 'left' }>More Details</Button>
                                     </Responsive>
                                 </List.Item>
                             ))
                         }
                     </List>
+                    <Modal open={modalOpen} className='movie-modal'>
+                        <MovieModal closeModal={this.closeModal} selectedMovie={selectedMovie} />
+                    </Modal>
                 </Container>
                 :
                     <>
