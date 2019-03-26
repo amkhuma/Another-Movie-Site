@@ -62,7 +62,7 @@ class App extends Component {
   }
 
   componentWillUnmount() {
-    this.clearInterval(this.state.timer);
+    clearInterval(this.state.timer);
   }
 
   tick = async () => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../static/css/RandomMovie.css';
-import { Segment, Container, Responsive } from 'semantic-ui-react';
+import { Segment, Container, Responsive} from 'semantic-ui-react';
 import { RenderMovie } from './RenderMovie';
 
 class RandomMovie extends Component {
@@ -32,6 +32,8 @@ class RandomMovie extends Component {
                         <Responsive minWidth={768}>
                             <RenderMovie includeTitle={true} includeImage={true} movie={movie} imageWidth={'40%'} contentWidth={'60%'} />
                         </Responsive>
+                        {/* <Button className='movie-list-button' floated='left'><Icon name='angle left'/>Previous</Button>
+                        <Button className='movie-list-button' floated='right'>Next <Icon name='angle right'/></Button> */}
                     </div>
                 </Container>
             </Segment>
