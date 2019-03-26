@@ -31,6 +31,7 @@
   text-align: left;
   line-height: 1.21428571em;
   padding: .47857143em 1em;
+  position: relative;
 }
 
 .search-input > input {

@@ -57,3 +57,12 @@
     display: table;
     clear: both;
 }
+
+.right-button {
+    right : 0px !important;
+}
+
+.left-button {
+    left : 0px !important;
+
+}

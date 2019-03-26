@@ -1,28 +1,31 @@
 import React, { Component } from 'react';
 import './static/css/App.css';
 import API from './providers/API';
-import { Container, Menu, Responsive, Loader, Input } from 'semantic-ui-react';
+import { Container, Menu, Responsive, Loader, Input, Icon } from 'semantic-ui-react';
 import RandomMovie from './components/RandomMovie';
 import PopularMovies from './components/PopularMovies';
 import validator from 'validator'
+import { SearchList } from './components/SearchList';
 
 class App extends Component {
 
   constructor(props)
   {
-      super(props)
-      this.state = {
-          nowPlaying : [],
-          popularMovies : [],
-          timer: null,
-          counter: 0,
-          selectedMovie : {},
-          selectedMovieId : 0,
-          isLoading: true,
-          searchResults : {},
-          isSearching  : false
-      }
+    super(props)
+    this.state = {
+        nowPlaying : [],
+        popularMovies : [],
+        timer: null,
+        counter: 0,
+        selectedMovie : {},
+        selectedMovieId : 0,
+        isLoading: true,
+        searchResults : [],
+        isSearching  : false
     }
+  }
+
+  isEmptyObject = (objct) => (!objct || Object.keys(objct).length <= 0)
 
   getNowPlaying = async () => {
     const res = await API.generated.nowPlaying()
@@ -36,7 +39,7 @@ class App extends Component {
 
   getMovieSearchQuerie = async (query) => {
     const res = await API.search.movie(query)
-    this.setState({ searchResults : res.data.results })		
+    this.setState({ searchResults : res.data.results, isSearching : false })		
   }
 
   getMovieDetails = async (id) => {		
@@ -67,7 +70,7 @@ class App extends Component {
     {
       await this.setState({counter : -1})
     }
-    // i dont think setting the state 2 times in a row is good, but i couldnt find a solution to some small problem i had :(
+    // I dont think setting the state 2 times in a row is good, but i couldnt find a solution to some small problem i had :(
     await this.setState({
       counter: this.state.counter + 1,
     });
@@ -82,17 +85,17 @@ class App extends Component {
 
   onChange = async (e) => {
     const query = e.target.value
-    if (!validator.isEmpty(query, { ignore_whitespace: true } )) {
+    if (!validator.isEmpty(query, { ignore_whitespace: true })) {
       await this.setState({ isSearching : true })
       this.getMovieSearchQuerie(query)
     }
     else {
-      this.setState({ isSearching : false })
+      await this.setState({ isSearching : false, searchResults : {} })
     }
   } 
 
   render() {
-    const {selectedMovie, isLoading, popularMovies, searchResults} = this.state
+    const {selectedMovie, isLoading, popularMovies, searchResults, isSearching} = this.state
     return (
       <div className="App">
         <nav className='AppNav'>
@@ -109,15 +112,27 @@ class App extends Component {
                 </Responsive>
               </Menu.Item>
               <Menu.Menu position='right'>
-                <Menu.Item style={{position : 'relative'}}>
-                  <Input onChange={this.onChange} className="search-input" placeholder='Seach Movies..'/>
-                  {/* <Icon className='search-input-icon' size='large' inverted name='search'/> */}
+                <Menu.Item> {/*style={{position : 'relative'}}*/}
+                  <Input loading={isSearching} onChange={this.onChange} className="search-input" icon='search' placeholder='Seach Movies..'>
+                  </Input>
+                  {
+                    isSearching ?
+                      null
+                    :
+                      <Icon className='search-input-icon' size='large' inverted name='search'/>
+                  }
                 </Menu.Item>
               </Menu.Menu>
             </Menu>
           </Container>
         </nav>
         <div className="AppBody">
+          {
+            this.isEmptyObject(searchResults) ? 
+                null 
+              :
+                <SearchList results={searchResults}/>
+          }
           {
             isLoading ? 
                 <Loader indeterminate inverted active size='big' content='Just a moment, fetching movie data.'/> 
@@ -127,6 +142,9 @@ class App extends Component {
                   <PopularMovies popularMovies={popularMovies}/>
                 </>
           }
+          <footer style={{height : '20px', backgroundColor : 'black', color : 'white', textAlign:'center'}}>
+            <p>Powered by <a className='tmdb-color' href="https://www.themoviedb.org">The movie database</a></p>
+          </footer>
         </div>
       </div>
     );

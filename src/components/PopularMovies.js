@@ -13,7 +13,6 @@ const RenderListContent = (props) => {
                 <h4 style={{marginBottom : '5px', marginTop : '5px'}}>Released : {movie.release_date}</h4>
                 <h4 style={{marginBottom : '5px', marginTop : '5px'}}>Popularity : {movie.popularity} <Icon className='tmdb-color' name='star outline'/> </h4>
                 <h4 style={{marginBottom : '5px', marginTop : '5px'}}>Language : {movie.original_language}</h4>
-                <h4 style={{marginBottom : '5px', marginTop : '5px'}}>Released : {movie.title}</h4>
             </List.Description>
 
         </List.Content>
@@ -59,7 +58,7 @@ class PopularMovies extends Component {
                                     <Responsive minWidth={768}>
                                         <Image floated={i % 2 === 0 ? 'left' : 'right' } size='small' src={API.images.movieImage(movie.poster_path)} />
                                         <RenderListContent movie={movie}/>
-                                        <Button onClick={() => this.openModal(movie)} className='movie-list-button' floated={i % 2 === 0 ? 'right' : 'left' }>More Details</Button>
+                                        <Button style={{position: 'absolute', bottom: '5px'}} onClick={() => this.openModal(movie)} className={`movie-list-button ${i % 2 === 0 ? 'right-button' : 'left-button'}`} >More Details</Button>
                                     </Responsive>
                                 </List.Item>
                             ))

@@ -25,7 +25,7 @@ class RandomMovie extends Component {
             <Segment className='movie-segment'>
                 <Container>
                     <div className="row">
-                        <h2>In Cinemas</h2>
+                        <h1>In Cinemas</h1>
                         <Responsive maxWidth={767}>
                             <RenderMovie includeTitle={true} includeImage={true} movie={movie} imageWidth={'100%'} contentWidth={'100%'} />
                         </Responsive>
