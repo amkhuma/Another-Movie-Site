@@ -142,8 +142,8 @@ class App extends Component {
                   <PopularMovies popularMovies={popularMovies}/>
                 </>
           }
-          <footer style={{height : '20px', backgroundColor : 'black', color : 'white', textAlign:'center'}}>
-            <p>Powered by <a className='tmdb-color' href="https://www.themoviedb.org">The movie database</a></p>
+          <footer style={{height : '40px', backgroundColor : 'black', color : 'white', textAlign:'center'}}>
+            <p style={{marginTop : '10px', marginBottom : '10px'}}>Powered by <a className='tmdb-color' href="https://www.themoviedb.org">The movie database</a></p>
           </footer>
         </div>
       </div>
