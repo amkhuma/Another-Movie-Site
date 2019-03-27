@@ -1,8 +1,8 @@
 // import axios from 'axios'
 
-const base_uri = 'http://api.themoviedb.org/3/'
+const base_uri = 'https://api.themoviedb.org/3/'
 // eslint-disable-next-line
-const image_uri = 'http://image.tmdb.org/t/p/original/'
+const image_uri = 'https://image.tmdb.org/t/p/original/'
 const API_KEY = '795a3e21e8c1bf69b4fca3164dfe2afb'
 const query_options = {
     lang : '&language=en-US',
