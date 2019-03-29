@@ -26,8 +26,10 @@ class RandomMovie extends Component {
         const site = "YouTube"
         const type_ = "Trailer"
 
+        console.log("movie")
         videoArray.forEach(vidObject => {
             //just return anything that matches the 2 condition
+            console.log(vidObject.key)
             let VID_YOUTUBE_KEY = vidObject.key
             
             if  (vidObject.site === site && vidObject.type === type_)
@@ -53,6 +55,7 @@ class RandomMovie extends Component {
                         {
                             movie.videos !== undefined ? 
                                 <Modal
+                                    // autoPlay={true}
                                     closeOnEscape
                                     closeOnDimmerClick
                                     closeIcon
@@ -60,7 +63,8 @@ class RandomMovie extends Component {
                                         <Button onClick={() => pauseTimer()} className='movie-list-button' floated='right'>Watch Trailer &#160; <Icon  name='video play'/></Button>
                                     }
                                 >
-                                    <Embed onClose={() => resumeTimer()} source='youtube' id={this.getMovieTrailer(movie.videos.results)} placeholder={API.images.movieImage(movie.backdrop_path)}/>
+                                
+                                    <Embed onClose={() => resumeTimer()} source='youtube'  key={this.getMovieTrailer(movie.videos.results)} placeholder={API.images.movieImage(movie.backdrop_path)}/>
                                 </Modal> 
                             : 
                                 null

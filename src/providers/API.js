@@ -4,7 +4,7 @@ const base_uri = process.env.REACT_APP_TMDB_BASE_URI
 // eslint-disable-next-line
 const image_uri = process.env.REACT_APP_TMDB_IMAGE_URI
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY
-const youtube_video_uri = "https://www.youtube.com/watch?v="
+const youtube_video_uri = "https://www.youtube.com/embed?v="
 
 const query_options = {
     lang : '&language=en-US',
