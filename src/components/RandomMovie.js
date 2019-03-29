@@ -11,14 +11,10 @@ class RandomMovie extends Component {
         super(props)
         this.state = {
             timer: null,
-            counter: 0        
+            counter: 0,
+            vidTrailerID : ''       
         }
     }
-
-    componentDidMount() {
-        this.setState({movie : this.props.selectedMovie})
-    }
-
     //looking at the video array, some movies have more videos and the trailer wont be necesarily be at a specific index in the array..
     //and some videos are not from youtube, so this is my attempt in filtering and only taking what I need {key, type, site}
     //it doesnt really matter whether i get the first or 2nd trailer.. I just want a trailer :)
@@ -26,19 +22,31 @@ class RandomMovie extends Component {
         const site = "YouTube"
         const type_ = "Trailer"
 
-        console.log("movie")
+        
+        let url =  ''
+        
         videoArray.forEach(vidObject => {
             //just return anything that matches the 2 condition
-            console.log(vidObject.key)
             let VID_YOUTUBE_KEY = vidObject.key
             
             if  (vidObject.site === site && vidObject.type === type_)
-                return (VID_YOUTUBE_KEY)
+            {
+                url = VID_YOUTUBE_KEY
+
+                return 
+            }
         });
+        return (url)
+    }
+
+    setVideoLink = (movie) => {
+        this.props.pauseTimer()
+        this.setState({ vidTrailerID : this.getMovieTrailer(movie.videos.results) })
     }
 
     render() {
-        const { pauseTimer, resumeTimer } =  this.props
+        const { vidTrailerID } = this.state
+        const { resumeTimer } =  this.props
         const movie = this.props.selectedMovie
 
         return (
@@ -55,16 +63,25 @@ class RandomMovie extends Component {
                         {
                             movie.videos !== undefined ? 
                                 <Modal
-                                    // autoPlay={true}
+                                    onClose={() => resumeTimer()}
                                     closeOnEscape
                                     closeOnDimmerClick
                                     closeIcon
                                     trigger={
-                                        <Button onClick={() => pauseTimer()} className='movie-list-button' floated='right'>Watch Trailer &#160; <Icon  name='video play'/></Button>
+                                        <Button onClick={() => this.setVideoLink(movie)} className='movie-list-button' floated='right'>Watch Trailer &#160; <Icon  name='video play'/></Button>
                                     }
                                 >
-                                
-                                    <Embed onClose={() => resumeTimer()} source='youtube'  key={this.getMovieTrailer(movie.videos.results)} placeholder={API.images.movieImage(movie.backdrop_path)}/>
+                                    <Embed 
+                                        iframe={{
+                                            allowFullScreen: true,
+                                            style: {
+                                                padding: 0,
+                                            },
+                                            src :  `//www.youtube.com/embed/${vidTrailerID}?autohide=true&amp;amp;autoplay=true&amp;amp;color=%23444444&amp;amp;hq=true&amp;amp;jsapi=false&amp;amp;modestbranding=false&amp;amp;rel=1`,
+                                        }} 
+                                        source={"youtube"}
+                                        placeholder={API.images.movieImage(movie.backdrop_path)}
+                                    />
                                 </Modal> 
                             : 
                                 null
