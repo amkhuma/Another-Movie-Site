@@ -59,7 +59,7 @@ class App extends Component {
   componentDidMount () {
     this.getNowPlaying()
     this.getPopularMovies()
-    this.timer = new Timer(1000).action(this.tick).start()
+    this.timer = new Timer(15000).action(this.tick).start()
     // this.timer = setInterval(this.tick, 15000);
     // this.setState({timer});
   }
