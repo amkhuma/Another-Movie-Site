@@ -6,6 +6,7 @@ import RandomMovie from './components/RandomMovie';
 import PopularMovies from './components/PopularMovies';
 import validator from 'validator'
 import { SearchList } from './components/SearchList';
+import Timer from 'advanced-timer'
 
 class App extends Component {
 
@@ -23,6 +24,7 @@ class App extends Component {
         searchResults : [],
         isSearching  : false
     }
+    this.timer = null
   }
 
   isEmptyObject = (objct) => (!objct || Object.keys(objct).length <= 0)
@@ -57,8 +59,19 @@ class App extends Component {
   componentDidMount () {
     this.getNowPlaying()
     this.getPopularMovies()
-    let timer = setInterval(this.tick, 15000);
-    this.setState({timer});
+    this.timer = new Timer(1000).action(this.tick).start()
+    // this.timer = setInterval(this.tick, 15000);
+    // this.setState({timer});
+  }
+
+  pauseTimer = () => {
+    // console.log("pause called!")
+    this.timer.pause()
+  }
+
+  resumeTimer = () => {
+    // console.log("resume called!")
+    this.timer.resume()
   }
 
   componentWillUnmount() {
@@ -138,7 +151,7 @@ class App extends Component {
                 <Loader indeterminate inverted active size='big' content='Just a moment, fetching movie data.'/> 
               : 
                 <>
-                  <RandomMovie selectedMovie={selectedMovie}/>
+                  <RandomMovie pauseTimer={this.pauseTimer} resumeTimer={this.resumeTimer} selectedMovie={selectedMovie}/>
                   <PopularMovies popularMovies={popularMovies}/>
                 </>
           }

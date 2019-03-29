@@ -1,9 +1,11 @@
 // import axios from 'axios'
 
-const base_uri = 'https://api.themoviedb.org/3/'
+const base_uri = process.env.REACT_APP_TMDB_BASE_URI
 // eslint-disable-next-line
-const image_uri = 'https://image.tmdb.org/t/p/original/'
-const API_KEY = '795a3e21e8c1bf69b4fca3164dfe2afb'
+const image_uri = process.env.REACT_APP_TMDB_IMAGE_URI
+const API_KEY = process.env.REACT_APP_TMDB_API_KEY
+const youtube_video_uri = "https://www.youtube.com/watch?v="
+
 const query_options = {
     lang : '&language=en-US',
     page : '&page=1' 
@@ -36,11 +38,16 @@ const API = {
             return (`${image_uri}${image}`)
         }
     },
+    trailer : {
+        getYoutubeVid : (id) => {
+            return (`${youtube_video_uri}${id}`)
+        }
+    },
     generated : {
         // THIS WILL BE USED TO GET ONE RANDOM MOVIE/TOP RATED MOVIE FROM THE MOST POPULAR MOVIES OR NOW PLAYING
         getMovieDetails : (movieID) => {
             return (
-                fetch(`${base_uri}movie/${movieID}?api_key=${API_KEY}${query_options.lang}`)
+                fetch(`${base_uri}movie/${movieID}?api_key=${API_KEY}${query_options.lang}&append_to_response=videos`)
                 .then(res => res.json())
                 .then(
                     (result) => {
