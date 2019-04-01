@@ -54,6 +54,31 @@ export class MovieModal extends React.Component {
                     <div className="modal-column column-padding">
                         <RenderMovie includeTitle={false} includeImage={true} movie={selectedMovie} imageWidth={'100%'} contentWidth={'100%'}/>
                         <center>
+                            {
+                                selectedMovie.videos !== undefined ? 
+                                    <Modal
+                                        closeOnEscape
+                                        closeOnDimmerClick
+                                        closeIcon
+                                        trigger={
+                                            <Button onClick={() => this.setVideoLink(selectedMovie)} className='movie-list-button' floated='right'>Watch Trailer &#160; <Icon  name='video play'/></Button>
+                                        }
+                                    >
+                                        <Embed 
+                                            iframe={{
+                                                allowFullScreen: true,
+                                                style: {
+                                                    padding: 0,
+                                                },
+                                                src :  `//www.youtube.com/embed/${vidTrailerID}?autohide=true&amp;amp;autoplay=true&amp;amp;color=%23444444&amp;amp;hq=true&amp;amp;jsapi=false&amp;amp;modestbranding=false&amp;amp;rel=1`,
+                                            }} 
+                                            source={"youtube"}
+                                            placeholder={API.images.movieImage(selectedMovie.backdrop_path)}
+                                        />
+                                    </Modal> 
+                                : 
+                                    null
+                            }
                             <Button className='movie-list-button' as='a' href={`https://www.themoviedb.org/movie/${selectedMovie.id}`} >View On TMDB</Button>
                         </center>
                     </div>
